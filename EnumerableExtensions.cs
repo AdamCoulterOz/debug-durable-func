@@ -9,7 +9,7 @@ public static class EnumerableExtensions
 		});
 	}
 
-    public static async Task<List<Exception>> WhenAllHandler(this IEnumerable<Task> tasks)
+    public static async Task<List<Exception>> WhenAllHandled(this IEnumerable<Task> tasks)
     {
         var whenAllTask = Task.WhenAll(tasks);
         var allExceptions = new List<Exception>();

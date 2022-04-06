@@ -15,15 +15,15 @@ public class Orchestration
 		{
 			var tasks = new List<Task>();
 			var exceptions = new List<Exception>();
-			for (var i = 0; i < count; i++)
+			for (var i = 1; i <= count; i++)
 			{
 				var instanceId = $"sayhello-{i}";
 				tasks.Add(context.CallSubOrchestratorAsync($"{nameof(SubOrchestration)}_{nameof(SubOrchestration.Run)}", instanceId, null));
 
 				// do i want to batch them? then await batches?
-				if (tasks.Count == 3 || i == count - 1)
+				if (tasks.Count == 3 || i == count)
 				{
-					exceptions.AddRange(await tasks.WhenAllHandler());
+					exceptions.AddRange(await tasks.WhenAllHandled());
 					tasks.Clear();
 				}
 			}
